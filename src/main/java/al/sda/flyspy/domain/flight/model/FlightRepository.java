@@ -6,10 +6,12 @@ import al.sda.flyspy.shared.Repository;
 import java.util.Optional;
 import java.util.Set;
 
-public class FlightRepository implements Repository<Flight, String>{
+public class FlightRepository implements Repository<Flight, Long>{
+
+
     @Override
-    public Optional<Flight> findById(String identifier) {
-        return Optional.empty();
+    public Optional<Flight> findById(Long identifier) {
+
     }
 
     @Override
@@ -23,7 +25,7 @@ public class FlightRepository implements Repository<Flight, String>{
     }
 
     @Override
-    public void delete(String s) {
+    public void delete(Long aLong) {
 
     }
 }
