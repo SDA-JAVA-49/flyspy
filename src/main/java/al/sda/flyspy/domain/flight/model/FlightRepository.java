@@ -12,6 +12,7 @@ public class FlightRepository implements Repository<Flight, Long>{
     @Override
     public Optional<Flight> findById(Long identifier) {
 
+        return Optional.empty();
     }
 
     @Override
