@@ -1,8 +1,8 @@
-# ✈️ TIA Flight Tracker Console App
+# ✈️ TIA domain.flight.model.entity.Flight Tracker Console App
 
 ## Overview
 This Java console application connects to the [AviationStack API](https://aviationstack.com/) to retrieve **live flight information** for flights **departing from** or **arriving at** Tirana International Airport (**TIA**).  
-Flight data is **persisted** into a local database using **Hibernate ORM**.
+domain.flight.model.entity.Flight data is **persisted** into a local database using **Hibernate ORM**.
 
 ---
 
@@ -22,13 +22,13 @@ Flight data is **persisted** into a local database using **Hibernate ORM**.
 ### Functional
 - Connect to AviationStack API to get **live flight data** for TIA (ICAO Code: LATI, IATA Code: TIA).
 - Persist the following flight details into a relational database:
-    - Flight Number
+    - domain.flight.model.entity.Flight Number
     - Airline Name
     - Departure Airport
     - Departure Time
     - Arrival Airport
     - Arrival Time
-    - Flight Status (scheduled, active, landed, canceled, etc.)
+    - domain.flight.model.entity.Flight Status (scheduled, active, landed, canceled, etc.)
 - Avoid storing duplicate flight records (based on flight number and date).
 
 ### Technical

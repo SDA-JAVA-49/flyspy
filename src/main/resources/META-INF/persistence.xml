@@ -9,9 +9,13 @@
         </description>
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 
+        <class>al.sda.flyspy.domain.airline.model.entity.Airline</class>
+        <class>al.sda.flyspy.domain.airport.model.entity.Airport</class>
+        <class>al.sda.flyspy.domain.flight.model.entity.Flight</class>
+
         <properties>
             <!-- Database connection settings -->
-            <property name="jakarta.persistence.jdbc.url" value=""/>
+            <property name="jakarta.persistence.jdbc.url" value="" />
             <property name="jakarta.persistence.jdbc.user" value="" />
             <property name="jakarta.persistence.jdbc.password" value="" />
             <property name="jakarta.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
