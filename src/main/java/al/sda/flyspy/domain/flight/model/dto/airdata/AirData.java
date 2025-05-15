@@ -4,7 +4,6 @@ public class AirData {
     private String flightDate;
     private String flightStatus;
     private TerminalPoint departure;
-    private ArrivalPoint arrival;
     private Airline airline;
     private FlightIdentifier flight;
     private Aircraft aircraft;
@@ -33,14 +32,6 @@ public class AirData {
 
     public void setDeparture(TerminalPoint departure) {
         this.departure = departure;
-    }
-
-    public ArrivalPoint getArrival() {
-        return arrival;
-    }
-
-    public void setArrival(ArrivalPoint arrival) {
-        this.arrival = arrival;
     }
 
     public Airline getAirline() {

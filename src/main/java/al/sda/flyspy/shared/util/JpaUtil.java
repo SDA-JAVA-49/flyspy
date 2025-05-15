@@ -7,6 +7,7 @@ public class JpaUtil {
     private static final EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("flyspy-cu");
 
     public static EntityManagerFactory getEntityManagerFactory() {
+
         return entityManagerFactory;
     }
 
