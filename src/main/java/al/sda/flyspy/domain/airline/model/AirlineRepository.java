@@ -50,4 +50,5 @@ public class AirlineRepository implements Repository<Airline, String> {
             manager.getTransaction().commit();
         }
     }
+
 }
