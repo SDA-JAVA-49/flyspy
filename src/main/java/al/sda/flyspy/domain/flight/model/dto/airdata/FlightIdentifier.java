@@ -4,7 +4,7 @@ public class FlightIdentifier {
     private String number;
     private String iata;
     private String icao;
-    private boolean codeshared; // Could be further defined if needed
+    private Object codeshared; // Could be further defined if needed
 
     public String getNumber() {
         return number;
@@ -30,11 +30,11 @@ public class FlightIdentifier {
         this.icao = icao;
     }
 
-    public boolean isCodeshared() {
+    public Object isCodeshared() {
         return codeshared;
     }
 
-    public void setCodeshared(boolean codeshared) {
+    public void setCodeshared(Object codeshared) {
         this.codeshared = codeshared;
     }
 }
