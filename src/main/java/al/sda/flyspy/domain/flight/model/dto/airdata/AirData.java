@@ -1,9 +1,14 @@
 package al.sda.flyspy.domain.flight.model.dto.airdata;
 
+import org.codehaus.jackson.annotate.JsonProperty;
+
 public class AirData {
+    @JsonProperty("flight_date")
     private String flightDate;
+    @JsonProperty("flight_status")
     private String flightStatus;
     private TerminalPoint departure;
+    private TerminalPoint arrival;
     private Airline airline;
     private FlightIdentifier flight;
     private Aircraft aircraft;
@@ -32,6 +37,14 @@ public class AirData {
 
     public void setDeparture(TerminalPoint departure) {
         this.departure = departure;
+    }
+
+    public TerminalPoint getArrival() {
+        return arrival;
+    }
+
+    public void setArrival(TerminalPoint arrival) {
+        this.arrival = arrival;
     }
 
     public Airline getAirline() {

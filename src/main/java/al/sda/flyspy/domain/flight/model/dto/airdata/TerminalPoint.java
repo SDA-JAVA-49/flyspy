@@ -1,5 +1,7 @@
 package al.sda.flyspy.domain.flight.model.dto.airdata;
 
+import org.codehaus.jackson.annotate.JsonProperty;
+
 // Base class for both departure and arrival
 public class TerminalPoint {
     private String airport;
@@ -8,14 +10,16 @@ public class TerminalPoint {
     private String icao;
     private String terminal;
     private String gate;
+    private String baggage;
     private Integer delay;
     private String scheduled;
     private String estimated;
     private String actual;
+    @JsonProperty("estimated_runway")
     private String estimatedRunway;
+    @JsonProperty("actual_runway")
     private String actualRunway;
 
-    // Getters and Setters
     public String getAirport() {
         return airport;
     }
@@ -110,5 +114,13 @@ public class TerminalPoint {
 
     public void setActualRunway(String actualRunway) {
         this.actualRunway = actualRunway;
+    }
+
+    public String getBaggage() {
+        return baggage;
+    }
+
+    public void setBaggage(String baggage) {
+        this.baggage = baggage;
     }
 }

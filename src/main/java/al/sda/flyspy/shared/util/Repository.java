@@ -1,4 +1,4 @@
-package al.sda.flyspy.shared;
+package al.sda.flyspy.shared.util;
 
 import java.util.Optional;
 import java.util.Set;

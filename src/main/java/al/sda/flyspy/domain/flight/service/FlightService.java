@@ -1,10 +1,11 @@
 package al.sda.flyspy.domain.flight.service;
 
 import al.sda.flyspy.domain.flight.model.dto.FlightDto;
-import al.sda.flyspy.domain.flight.model.dto.airdata.AirData;
+import al.sda.flyspy.domain.flight.model.dto.airdata.FlightDataResponse;
 import al.sda.flyspy.domain.flight.model.entity.Flight;
-import al.sda.flyspy.shared.Repository;
+import al.sda.flyspy.shared.util.Repository;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -18,8 +19,13 @@ public class FlightService {
     }
 
     public List<FlightDto> getFlightList() {
-        List<AirData> departingFlights = airDataService.getFlights(Map.of("dep_iata", "TIA"));
-        List<AirData> arrivingFlights = airDataService.getFlights(Map.of("arr_iata", "TIA"));
+        Map<String, String> params = new HashMap<>();
+        params.put("dep_iata", "TIA");
+        FlightDataResponse departingFlights = airDataService.getFlights(params);
+        params.clear();
+        params.put("arr_iata", "TAN");
+        FlightDataResponse arrivingFlights = airDataService.getFlights(params);
+
         //TODO: Store data in DB
         //TODO: convert from AirData to FlightDto
         return List.of();

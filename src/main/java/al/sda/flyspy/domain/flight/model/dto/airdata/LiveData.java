@@ -1,14 +1,19 @@
 package al.sda.flyspy.domain.flight.model.dto.airdata;
 
 
+import org.codehaus.jackson.annotate.JsonProperty;
+
 public class LiveData {
     private String updated;
     private Double latitude;
     private Double longitude;
     private Double altitude;
     private Double direction;
+    @JsonProperty("speed_horizontal")
     private Double speedHorizontal;
+    @JsonProperty("speed_vertical")
     private Double speedVertical;
+    @JsonProperty("is_ground")
     private Boolean isGround;
 
     public String getUpdated() {

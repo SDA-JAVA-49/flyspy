@@ -4,7 +4,7 @@ import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 
 public class JpaUtil {
-    private static final EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("flyspy-cu");
+    private static final EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("flyspy-pu");
 
     public static EntityManagerFactory getEntityManagerFactory() {
 
