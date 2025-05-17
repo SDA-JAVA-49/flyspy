@@ -46,7 +46,13 @@ public class FlightService {
         flightDto.setArrivalAirport(airData.getArrival().getIata());
         flightDto.setDepartureTime(airData.getDeparture().getScheduled());
         flightDto.setArrivalTime(airData.getArrival().getScheduled());
-        flightDto.setAircraftRegistration(airData.getAircraft().getRegistration());
+        flightDto.setAirlineName(airData.getAirline().getName());
+
+        if(airData.getAircraft() != null){
+            flightDto.setAircraftRegistration(airData.getAircraft().getRegistration());}
+        else{
+            flightDto.setAircraftRegistration("⚠ Missing aircraft");
+        }
         flightDto.setAirlineName(airData.getAirline().getName());
 
 

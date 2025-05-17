@@ -1,7 +1,5 @@
 package al.sda.flyspy.domain.flight.model.dto;
 
-import al.sda.flyspy.domain.flight.model.dto.airdata.AirData;
-
 public class FlightDto {
 
     private String flightNumber;
