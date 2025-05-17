@@ -35,17 +35,15 @@ public class AirDataServiceImpl implements AirDataService{
                         .GET()
                         .build();
                 HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-
+                System.out.println(response.body());
                 ObjectMapper mapper = new ObjectMapper();
                 ApiResponse root = mapper.readValue(response.body(), ApiResponse.class);
 
-                root.getData().forEach(d -> System.out.println(d.getFlight().getNumber()));
+                return root.getData();
             } catch (IOException | InterruptedException e) {
                 throw new ExternalServiceException();
             } catch (URISyntaxException e) {
                 throw new RuntimeException(e);
             }
-
-            return null;
         }
 }
