@@ -1,13 +1,22 @@
 package al.sda.flyspy.domain.flight.model.dto.airdata;
 
+import org.codehaus.jackson.annotate.JsonProperty;
+
+
 public class AirData {
+    @JsonProperty("flight_date")
     private String flightDate;
+    @JsonProperty("flight_status")
     private String flightStatus;
     private TerminalPoint departure;
-    private ArrivalPoint arrival;
+    private TerminalPoint arrival;
+    @JsonProperty("airline")
     private Airline airline;
+    @JsonProperty("flight")
     private FlightIdentifier flight;
+    @JsonProperty("aircraft")
     private Aircraft aircraft;
+    @JsonProperty("live")
     private LiveData live;
 
     // Getters and Setters
@@ -33,14 +42,6 @@ public class AirData {
 
     public void setDeparture(TerminalPoint departure) {
         this.departure = departure;
-    }
-
-    public ArrivalPoint getArrival() {
-        return arrival;
-    }
-
-    public void setArrival(ArrivalPoint arrival) {
-        this.arrival = arrival;
     }
 
     public Airline getAirline() {
@@ -73,5 +74,13 @@ public class AirData {
 
     public void setLive(LiveData live) {
         this.live = live;
+    }
+
+    public TerminalPoint getArrival() {
+        return arrival;
+    }
+
+    public void setArrival(TerminalPoint arrival) {
+        this.arrival = arrival;
     }
 }
