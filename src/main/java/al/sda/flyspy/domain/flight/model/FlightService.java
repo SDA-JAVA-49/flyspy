@@ -17,8 +17,9 @@ public class FlightService {
     public FlightService(FlightRepository flightRepository) {
         this.flightRepository = flightRepository;
     }
-    public void saveFlight(LocalDateTime flightDate, LocalDateTime arrivalDate, String flightNumber, FlightStatus flightStatus, Airport departure, Airport arrival, Airline operatingAirline) {
+    public void saveFlight(Long Id, LocalDateTime flightDate, LocalDateTime arrivalDate, String flightNumber, FlightStatus flightStatus, Airport departure, Airport arrival, Airline operatingAirline) {
         Flight flight = new Flight();
+        flight.setId(Id);
         flight.setFlightDate(flightDate);
         flight.setArrivalDate(arrivalDate);
         flight.setFlightNumber(flightNumber);
