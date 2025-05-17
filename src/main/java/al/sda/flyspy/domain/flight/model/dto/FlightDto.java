@@ -67,17 +67,5 @@ public class FlightDto {
     public void setAirlineName(String airlineName) {
         this.airlineName = airlineName;
     }
-    public FlightDto parseToFlightDto(AirData airData){
-        FlightDto flightDto = new FlightDto();
-        flightDto.setFlightNumber(airData.getFlight().getNumber());
-        flightDto.setDepartureAirport(airData.getDeparture().getIata());
-        flightDto.setArrivalAirport(airData.getArrival().getIata());
-        flightDto.setDepartureTime(airData.getDeparture().getScheduled());
-        flightDto.setArrivalTime(airData.getArrival().getScheduled());
-        flightDto.setAircraftRegistration(airData.getAircraft().getRegistration());
-        flightDto.setAirlineName(airData.getAirline().getName());
 
-
-        return flightDto;
-    }
 }
