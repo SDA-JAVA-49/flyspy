@@ -1,7 +1,7 @@
 package al.sda.flyspy.domain.airport.model;
 
 import al.sda.flyspy.domain.airport.model.entity.Airport;
-import al.sda.flyspy.shared.Repository;
+import al.sda.flyspy.shared.util.Repository;
 import al.sda.flyspy.shared.util.JpaUtil;
 import jakarta.persistence.EntityManager;
 
