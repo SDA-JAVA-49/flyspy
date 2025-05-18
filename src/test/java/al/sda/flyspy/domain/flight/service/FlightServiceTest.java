@@ -13,7 +13,12 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 
+import java.net.URISyntaxException;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.when;
 
 class FlightServiceTest {
     @Mock
@@ -27,6 +32,7 @@ class FlightServiceTest {
         repository = Mockito.mock(Repository.class);
         airDataService = Mockito.mock(AirDataService.class);
         flightService = new FlightService(repository, airDataService);
+
     }
 
     @Test
@@ -50,7 +56,7 @@ class FlightServiceTest {
         Mockito.when(airData.getDeparture().getIata())
                 .thenReturn("TIA");
         Mockito.when(airData.getDeparture().getScheduled())
-                        .thenReturn("2025-05-18T00:20:00+00:00");
+                .thenReturn("2025-05-18T00:20:00+00:00");
         Mockito.when(airData.getArrival().getIata())
                 .thenReturn("FRA");
         Mockito.when(airData.getArrival().getScheduled())
@@ -92,4 +98,77 @@ class FlightServiceTest {
 
         assertEquals(expected, actual);
     }
+    @Test
+    void testGetDepartingFlights() throws URISyntaxException {
+        // Arrange
+        AirData airData = Mockito.mock(AirData.class);
+        FlightIdentifier flightIdentifier = Mockito.mock(FlightIdentifier.class);
+        Airline airline = Mockito.mock(Airline.class);
+        TerminalPoint departure = Mockito.mock(TerminalPoint.class);
+        TerminalPoint arrival = Mockito.mock(TerminalPoint.class);
+
+        Mockito.when(airData.getFlight()).thenReturn(flightIdentifier);
+        Mockito.when(flightIdentifier.getNumber()).thenReturn("LH176");
+        Mockito.when(airData.getAirline()).thenReturn(airline);
+        Mockito.when(airline.getName()).thenReturn("Lufthansa");
+        Mockito.when(airData.getDeparture()).thenReturn(departure);
+        Mockito.when(departure.getIata()).thenReturn("TIA");
+        Mockito.when(departure.getScheduled()).thenReturn("2025-05-18T10:20:00+00:00");
+        Mockito.when(airData.getArrival()).thenReturn(arrival);
+        Mockito.when(arrival.getIata()).thenReturn("FRA");
+        Mockito.when(arrival.getScheduled()).thenReturn("2025-05-18T12:20:00+00:00");
+
+        when(airDataService.getFlights(any())).thenReturn(List.of(airData));
+
+        // Act
+        List<FlightDto> departingFlights = flightService.getDepartingFlights();
+
+        // Assert
+        assertEquals(1, departingFlights.size());
+        FlightDto flightDto = departingFlights.get(0);
+        assertEquals("LH176", flightDto.getFlightNumber());
+        assertEquals("Lufthansa", flightDto.getAirlineName());
+        assertEquals("TIA", flightDto.getDepartureAirport());
+        assertEquals("FRA", flightDto.getArrivalAirport());
+        assertEquals("2025-05-18T10:20:00+00:00", flightDto.getDepartureTime());
+        assertEquals("2025-05-18T12:20:00+00:00", flightDto.getArrivalTime());
+    }
+
+    @Test
+    void testGetArrivingFlights() throws URISyntaxException {
+        // Arrange
+        AirData airData = Mockito.mock(AirData.class);
+        FlightIdentifier flightIdentifier = Mockito.mock(FlightIdentifier.class);
+        Airline airline = Mockito.mock(Airline.class);
+        TerminalPoint departure = Mockito.mock(TerminalPoint.class);
+        TerminalPoint arrival = Mockito.mock(TerminalPoint.class);
+
+        Mockito.when(airData.getFlight()).thenReturn(flightIdentifier);
+        Mockito.when(flightIdentifier.getNumber()).thenReturn("LH175");
+        Mockito.when(airData.getAirline()).thenReturn(airline);
+        Mockito.when(airline.getName()).thenReturn("Lufthansa");
+        Mockito.when(airData.getDeparture()).thenReturn(departure);
+        Mockito.when(departure.getIata()).thenReturn("FRA");
+        Mockito.when(departure.getScheduled()).thenReturn("2025-05-18T00:20:00+00:00");
+        Mockito.when(airData.getArrival()).thenReturn(arrival);
+        Mockito.when(arrival.getIata()).thenReturn("TIA");
+        Mockito.when(arrival.getScheduled()).thenReturn("2025-05-20T00:20:00+00:00");
+
+        when(airDataService.getFlights(any())).thenReturn(List.of(airData));
+
+        // Act
+        List<FlightDto> arrivingFlights = flightService.getArrivingFlights();
+
+        // Assert
+        assertEquals(1, arrivingFlights.size());
+        FlightDto flightDto = arrivingFlights.get(0);
+        assertEquals("LH175", flightDto.getFlightNumber());
+        assertEquals("Lufthansa", flightDto.getAirlineName());
+        assertEquals("FRA", flightDto.getDepartureAirport());
+        assertEquals("TIA", flightDto.getArrivalAirport());
+        assertEquals("2025-05-18T00:20:00+00:00", flightDto.getDepartureTime());
+        assertEquals("2025-05-20T00:20:00+00:00", flightDto.getArrivalTime());
+    }
 }
+
+

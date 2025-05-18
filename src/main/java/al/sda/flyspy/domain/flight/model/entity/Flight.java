@@ -100,4 +100,19 @@ public class Flight {
     public void setId(Long id) {
         this.id = id;
     }
+
+    public void setAirlineName(String lufthansa) {
+    }
+
+    public void setDepartureAirport(String tia) {
+    }
+
+    public void setArrivalAirport(String fra) {
+    }
+
+    public void setDepartureTime(String s) {
+    }
+
+    public void setArrivalTime(String s) {
+    }
 }

@@ -8,4 +8,6 @@ public interface Repository<E, ID> {
     E save(E object);
     Set<E> getAll();
     void delete(ID id);
+
+    ID findByField(String departureAirport, String tia);
 }
