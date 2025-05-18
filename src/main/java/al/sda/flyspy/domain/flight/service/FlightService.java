@@ -26,24 +26,25 @@ public class FlightService {
     }
 
     public List<FlightDto> getArrivingFlights() throws URISyntaxException {
-        List<FlightDto> result = new ArrayList<>();
         List<AirData> arrivingFlights = airDataService.getFlights(Map.of("arr_iata", "TIA"));
-        for (AirData flight : arrivingFlights) {
-            FlightDto flightDto = convertToFlightDto(flight);
-            result.add(flightDto);
+        if (arrivingFlights == null) {
+            return List.of();
         }
-        return result;
-
-        //TODO: Store data in DB
-        //TODO: convert from AirData to FlightDto
+        return convertToFlightDtoList(arrivingFlights);
     }
 
     public List<FlightDto> getDepartingFlights() throws URISyntaxException {
-        List<FlightDto> result = new ArrayList<>();
         List<AirData> departingFlights = airDataService.getFlights(Map.of("dep_iata", "TIA"));
-        for (AirData flight : departingFlights) {
-            FlightDto flightDto = convertToFlightDto(flight);
-            result.add(flightDto);
+        if (departingFlights == null) {
+            return List.of();
+        }
+        return convertToFlightDtoList(departingFlights);
+    }
+
+    private List<FlightDto> convertToFlightDtoList(List<AirData> airDataList) {
+        List<FlightDto> result = new ArrayList<>();
+        for (AirData airData : airDataList) {
+            result.add(convertToFlightDto(airData));
         }
         return result;
     }
@@ -56,7 +57,7 @@ public class FlightService {
         flightDto.setFlightNumber(Optional.of(airData)
                 .map(AirData::getFlight)
                 .map(FlightIdentifier::getNumber)
-                .orElse("-"));
+                .orElse(DEFAULT_VALUE));
 
         Optional<TerminalPoint> departure = Optional.of(airData).map(AirData::getDeparture);
         flightDto.setDepartureAirport(departure.map(TerminalPoint::getIata).orElse(DEFAULT_VALUE));
@@ -76,4 +77,3 @@ public class FlightService {
         return flightDto;
     }
 }
-
