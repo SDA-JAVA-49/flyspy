@@ -14,6 +14,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -98,12 +99,15 @@ class FlightServiceTest {
     @Test
     void testGetDepartureFlightList() {
         FlightDataResponse departingFlights = new FlightDataResponse();
-        departingFlights.setData(List.of(null, new AirData()));
+        List<AirData> departingFlightList = new ArrayList<>();
+        departingFlightList.add(new AirData());
+        departingFlightList.add(null);
+        departingFlights.setData(departingFlightList);
         Mockito.when(airDataService.getFlights(Mockito.anyMap()))
                 .thenReturn(departingFlights);
         List<FlightDto> result = flightService.getDepartureFlightList();
         assertNotNull(result);
-        assertTrue(result.isEmpty());
+        assertEquals(1, result.size());
     }
     @Test
     void testGetDepartureFlightList_NullData() {
