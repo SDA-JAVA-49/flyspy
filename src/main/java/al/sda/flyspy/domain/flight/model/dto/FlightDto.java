@@ -1,5 +1,7 @@
 package al.sda.flyspy.domain.flight.model.dto;
 
+import java.util.Objects;
+
 public class FlightDto {
 
     private String flightNumber;
@@ -64,6 +66,20 @@ public class FlightDto {
 
     public void setAirlineName(String airlineName) {
         this.airlineName = airlineName;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        FlightDto flightDto = (FlightDto) o;
+        return Objects.equals(flightNumber, flightDto.flightNumber)
+                && Objects.equals(departureAirport, flightDto.departureAirport)
+                && Objects.equals(this.arrivalAirport, flightDto.getArrivalAirport())
+                && Objects.equals(this.departureTime, flightDto.getDepartureTime())
+                && Objects.equals(this.arrivalTime, flightDto.getArrivalTime())
+                && Objects.equals(this.aircraftRegistration, flightDto.getAircraftRegistration())
+                && Objects.equals(this.airlineName, flightDto.getAirlineName());
     }
 
 }
