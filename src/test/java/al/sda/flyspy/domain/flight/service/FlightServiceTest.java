@@ -14,6 +14,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 
 import java.net.URISyntaxException;
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -113,13 +114,14 @@ class FlightServiceTest {
 
     @Test
     void testGetDepartingFlights_NullResult() throws URISyntaxException {
+        List<AirData> serviceResult = new ArrayList<>();
+        serviceResult.add(null);
+        serviceResult.add(new AirData());
+        when(airDataService.getFlights(any())).thenReturn(serviceResult);
 
-        when(airDataService.getFlights(any())).thenReturn(null);
+        List<FlightDto> actual = flightService.getDepartingFlights();
 
-        List<FlightDto> departingFlights = flightService.getDepartingFlights();
-
-        assertNotNull(departingFlights);
-        assertTrue(departingFlights.isEmpty());
+        assertEquals(1 , actual.size());
     }
 
     @Test
