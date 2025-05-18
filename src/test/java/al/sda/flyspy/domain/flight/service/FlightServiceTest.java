@@ -4,6 +4,7 @@ import al.sda.flyspy.domain.flight.model.dto.FlightDto;
 import al.sda.flyspy.domain.flight.model.dto.airdata.AirData;
 import al.sda.flyspy.domain.flight.model.dto.airdata.Aircraft;
 import al.sda.flyspy.domain.flight.model.dto.airdata.Airline;
+import al.sda.flyspy.domain.flight.model.dto.airdata.FlightDataResponse;
 import al.sda.flyspy.domain.flight.model.dto.airdata.FlightIdentifier;
 import al.sda.flyspy.domain.flight.model.dto.airdata.TerminalPoint;
 import al.sda.flyspy.domain.flight.model.entity.Flight;
@@ -12,6 +13,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.Mockito;
+
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -91,5 +94,25 @@ class FlightServiceTest {
         expected.setAirlineName("-");
 
         assertEquals(expected, actual);
+    }
+    @Test
+    void testGetDepartureFlightList() {
+        FlightDataResponse departingFlights = new FlightDataResponse();
+        departingFlights.setData(List.of());
+        Mockito.when(airDataService.getFlights(Mockito.anyMap()))
+                .thenReturn(departingFlights);
+        List<FlightDto> result = flightService.getDepartureFlightList();
+        assertNotNull(result);
+        assertTrue(result.isEmpty());
+    }
+    @Test
+   void testGetArrivalFlightList() {
+        FlightDataResponse arrivalFlights = new FlightDataResponse();
+        arrivalFlights.setData(List.of());
+        Mockito.when(airDataService.getFlights(Mockito.anyMap()))
+                .thenReturn(arrivalFlights);
+        List<FlightDto> result = flightService.getArrivingFlightList();
+        assertNotNull(result);
+        assertTrue(result.isEmpty());
     }
 }
