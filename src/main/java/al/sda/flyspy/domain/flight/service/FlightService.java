@@ -13,6 +13,7 @@ import al.sda.flyspy.shared.util.Repository;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
 
 public class FlightService {
@@ -28,10 +29,29 @@ public class FlightService {
     public List<FlightDto> getDepartureFlightList() {
         Map<String, String> params = new HashMap<>();
         params.put("dep_iata", "TIA");
-        FlightDataResponse departingFlights = airDataService.getFlights(params);
-        return departingFlights.getData().stream()
-                .map(airData -> parseToFlightDto(airData))
-                .toList();
+        try {
+            FlightDataResponse flightDataResponse = airDataService.getFlights(params);
+
+            if (flightDataResponse == null || flightDataResponse.getData() == null) {
+                return List.of();
+            }
+            return flightDataResponse.getData().stream()
+                    .filter(Objects::nonNull)
+                    .map(airData -> {
+                        try {
+                            return parseToFlightDto(airData);
+                        }catch (Exception e) {
+                            System.err.println("Failed to parse air data: " + e.getMessage());
+                            return null;
+                        }
+                    })
+                    .filter(Objects::nonNull)
+                    .toList();
+        } catch (Exception e) {
+            System.err.println("Error:" + e.getMessage());
+            return List.of();
+        }
+
     }
 
     public List<FlightDto> getArrivingFlightList() {
